@@ -11,17 +11,20 @@ struct FloatingButtonsView<Content: View>: View {
     @ViewBuilder var content: Content
 
     var statusColor: Color
+    let onTriggerHeader: () -> Void
     let onTriggerLeft: () -> Void
     let onTriggerRight: () -> Void
 
     init(statusColor: Color,
          @ViewBuilder content: @escaping () -> Content,
          onTriggerLeft: @escaping () -> Void,
-         onTriggerRight: @escaping () -> Void) {
+         onTriggerRight: @escaping () -> Void,
+         onTriggerHeader: @escaping () -> Void) {
         self.content = content()
         self.statusColor = statusColor
         self.onTriggerLeft = onTriggerLeft
         self.onTriggerRight = onTriggerRight
+        self.onTriggerHeader = onTriggerHeader
     }
 
     var body: some View {
@@ -31,6 +34,9 @@ struct FloatingButtonsView<Content: View>: View {
                     .animation(.easeInOut, value: statusColor)
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 20)
+                    .onTapGesture {
+                      onTriggerHeader()
+                    }
 
                 content
             }

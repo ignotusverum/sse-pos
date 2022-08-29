@@ -44,6 +44,8 @@ struct BasicView: View {
       viewModel.disconnect()
     } onTriggerRight: {
       viewModel.reconnect()
+    } onTriggerHeader: {
+      viewModel.reset()
     }.task {
       await viewModel.connect()
     }
