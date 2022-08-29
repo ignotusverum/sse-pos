@@ -1,0 +1,49 @@
+//
+//  BasicView.swift
+//  sse-pos-ios
+//
+//  Created by Vlad Z. on 8/28/22.
+//
+
+import SwiftUI
+
+struct BasicView: View {
+    @StateObject private var viewModel = BasicViewModel()
+
+    var columns: [GridItem] = [
+        GridItem(.fixed(150)),
+        GridItem(.flexible()),
+        GridItem(.fixed(150)),
+    ]
+
+    var body: some View {
+        FloatingButtonsView(content: {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(viewModel.viewData) { row in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25,
+                                             style: .continuous)
+                                .fill(.indigo)
+
+                            Text(row.title)
+                                .font(.caption2.bold())
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                                .frame(width: 100, height: 50)
+                        }
+                    }
+                    .padding(.horizontal, 25)
+                }
+                .animation(.easeInOut,
+                           value: viewModel.viewData)
+            }
+        },
+                            statusColor: viewModel.state.backgroundColor,
+                            onTriggerLeft: { viewModel.disconnect() },
+                            onTriggerRight: { viewModel.reconnect() })
+        .task {
+            await viewModel.connect()
+        }
+    }
+}
