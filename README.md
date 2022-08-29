@@ -23,6 +23,6 @@ https://user-images.githubusercontent.com/5115258/187267590-61832274-893e-40ee-9
 
 ## How to run
 
-1. Open [API] folder & run `npm instlal`
+1. Open [API](https://github.com/ignotusverum/sse-pos/tree/main/API) folder & run `npm install`
 2. run `node API/API.js`
 3. open `.xcodeproj` & run
