@@ -42,10 +42,11 @@ class BasicViewModel: ObservableObject {
                 guard let self = self else { return }
                 switch event {
                 case .initial,
-                        .received(.failure):
+                     .received(.failure):
                     break
                 case let .received(.success(eventValue)):
-                    self.viewData.append(.init(id: .init(), title: eventValue.rawValue))
+                    self.viewData.append(.init(id: .init(),
+                                               title: eventValue.rawValue))
                 case let .changedState(streamState):
                     self.state = streamState
                 }

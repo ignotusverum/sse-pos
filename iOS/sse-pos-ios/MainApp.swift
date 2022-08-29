@@ -12,10 +12,6 @@ struct MainApp: App {
     var body: some Scene {
         WindowGroup {
             BasicView()
-                .tabItem {
-                    Label("Basic", systemImage: "note.text")
-                    Text("Basic")
-                }
         }
     }
 }

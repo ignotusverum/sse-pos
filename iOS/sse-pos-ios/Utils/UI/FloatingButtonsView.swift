@@ -14,8 +14,8 @@ struct FloatingButtonsView<Content: View>: View {
     let onTriggerLeft: () -> Void
     let onTriggerRight: () -> Void
 
-    init(@ViewBuilder content: @escaping () -> Content,
-         statusColor: Color,
+    init(statusColor: Color,
+         @ViewBuilder content: @escaping () -> Content,
          onTriggerLeft: @escaping () -> Void,
          onTriggerRight: @escaping () -> Void) {
         self.content = content()
@@ -26,7 +26,7 @@ struct FloatingButtonsView<Content: View>: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            VStack {
+          VStack(spacing: 0) {
                 statusColor
                     .animation(.easeInOut, value: statusColor)
                     .edgesIgnoringSafeArea(.top)
